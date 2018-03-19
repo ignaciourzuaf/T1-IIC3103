@@ -1,6 +1,15 @@
 class EntriesController < ApplicationController
   before_action :set_entry, only: [:show, :edit, :update, :destroy]
 
+  before_action :checkadmin, only: [:index,:new, :edit, :update, :destroy, :delete]
+
+
+  def checkadmin
+      if ! user_signed_in?
+        redirect_to root_path
+      end
+  end
+
   # GET /entries
   # GET /entries.json
   def index
@@ -27,7 +36,6 @@ class EntriesController < ApplicationController
   # POST /entries.json
   def create
     @entry = Entry.new(entry_params)
-    puts current_user.id
     respond_to do |format|
       if @entry.save
         format.html { redirect_to @entry, notice: 'Entry was successfully created.' }

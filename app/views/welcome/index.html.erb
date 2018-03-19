@@ -15,8 +15,7 @@
     <h2 align = "center">Noticias a la hora</h2>
     <div class="container">
     <div class="row">
-    <table>
-      <tbody>
+
         <% var = 0%>
         <% Entry.all.reverse_each do |entry| %>
         <% var+=1 %>
@@ -26,22 +25,27 @@
               <div class="container" style="background-color: #DFDDD7">
             <h4><%= entry.title %></h4>
             <h6><%= entry.subtitle %></h6>
-            <%= simple_format truncate(entry.content, length: 500, separator: ' ')%>
+            <%= simple_format truncate(entry.content, length: 500, separator: " ")%>
             <!-- <% if entry.content.length <= 500%>
               <p><%= simple_format(entry.content) %></p>
             <% else %>
               <p><%= simple_format(entry.content[0...477])%>...</p>
             <% end %> -->
-            <p>Comentarios: <%= entry.comments.count%></p>
+            <p align="right">Comentarios: <%= entry.comments.count%></p>
             <p align="right">Fecha publicación: <%= entry.fecha %></p>
 
-            <p><%= button_to 'Ver completa', entry, :method => :get%> <%=link_to 'Edit - ', edit_entry_path(entry)%> <%=link_to 'Destroy', entry, method: :delete, data: { confirm: 'Are you sure?' } %></p>
+            <p><%= button_to 'Ver completa', entry, :method => :get%></p>
+
+            <% if user_signed_in? %>
+              <% if current_user.has_role? :admin%>
+              <p align ="right"> <%=link_to 'Edit - ', edit_entry_path(entry)%> <%=link_to 'Destroy', entry, method: :delete, data: { confirm: 'Are you sure?' } %></p>
+              <% end%>
+            <% end%>
             </div>
             </div>
           </tr>
         <% end %>
-      </tbody>
-    </table>
+
     </div>
     </div>
 
