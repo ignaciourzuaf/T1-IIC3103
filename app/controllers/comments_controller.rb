@@ -1,7 +1,7 @@
 class CommentsController < ApplicationController
   before_action :set_comment, only: [:show, :edit, :update, :destroy]
 
-  before_action :redir,  only: [:index,:show, :edit, :update, :destroy]
+  before_action :redir,  only: [:index,:show, :edit, :update]
 
 
   def redir

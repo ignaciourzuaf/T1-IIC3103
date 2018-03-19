@@ -1,7 +1,7 @@
 class EntriesController < ApplicationController
   before_action :set_entry, only: [:show, :edit, :update, :destroy]
 
-  before_action :checkadmin, only: [:index,:new, :edit, :update, :destroy, :delete]
+  before_action :checkadmin, only: [:index,:new, :edit, :update]
 
 
   def checkadmin
