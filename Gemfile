@@ -58,3 +58,5 @@ ruby "2.5.0"
 gem 'devise'
 gem 'cancancan', '~> 1.9'
 gem 'rolify'
+
+gem 'rails-erd', require: false, group: :development
