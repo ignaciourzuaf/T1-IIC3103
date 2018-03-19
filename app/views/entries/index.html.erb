@@ -14,7 +14,7 @@
   </thead>
 
   <tbody>
-    <% @entries.each do |entry| %>
+    <% @entries.reverse_each do |entry| %>
       <tr>
         <td><%= entry.title %></td>
         <td><%= entry.fecha %></td>

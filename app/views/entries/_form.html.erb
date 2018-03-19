@@ -28,8 +28,7 @@
 
 
   <div class="field">
-    <%= form.label :fecha %>
-    <%= form.date_select :fecha, id: :entry_fecha %>
+    <%= form.hidden_field :fecha, id: :entry_fecha, :value => Date.today %>
   </div>
 
 
