@@ -5,9 +5,17 @@ class EntriesController < ApplicationController
 
 
   def checkadmin
-      if ! user_signed_in?
-        redirect_to root_path
+    var = 0
+    if ! user_signed_in?
+      var = 1
+    else
+      if ! current_user.has_role? :admin
+        var = 1
       end
+    end
+    if var == 1
+      redirect_to root_path
+    end
   end
 
   # GET /entries
