@@ -7,23 +7,45 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
-    <title>Hello, world!</title>
+    <title>Chilean News</title>
   </head>
   <body>
-    <h1>Hello, world!</h1>
+    <!-- <%= link_to "Noticias", entries_path %> -->
+
+    <h2 align = "center">Noticias a la hora</h2>
     <div class="container">
-      <div class="row">
-        <div class="col-sm">
-          One of three columns
-        </div>
-        <div class="col-sm">
-          One of three columns
-        </div>
-        <div class="col-sm">
-          One of three columns
-        </div>
-      </div>
+    <div class="row">
+    <table>
+      <tbody>
+        <% var = 0%>
+        <% Entry.all.reverse_each do |entry| %>
+        <% var+=1 %>
+        <% break if var==11%>
+          <tr>
+            <div class="col-6 col-lg-6">
+              <div class="container" style="background-color: #DFDDD7">
+            <h4><%= entry.title %></h4>
+            <h6><%= entry.subtitle %></h6>
+            <%= simple_format truncate(entry.content, length: 500, separator: ' ')%>
+            <!-- <% if entry.content.length <= 500%>
+              <p><%= simple_format(entry.content) %></p>
+            <% else %>
+              <p><%= simple_format(entry.content[0...477])%>...</p>
+            <% end %> -->
+            <p>Comentarios: <%= entry.comments.count%></p>
+            <p align="right">Fecha publicación: <%= entry.fecha %></p>
+
+            <p><%= button_to 'Ver completa', entry, :method => :get%> <%=link_to 'Edit - ', edit_entry_path(entry)%> <%=link_to 'Destroy', entry, method: :delete, data: { confirm: 'Are you sure?' } %></p>
+            </div>
+            </div>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
     </div>
+    </div>
+
+
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
