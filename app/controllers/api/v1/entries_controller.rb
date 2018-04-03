@@ -13,6 +13,8 @@ module Api
 
        def show
          @entry = Entry.find(params[:id])
+         rescue ActiveRecord::RecordNotFound
+         redirect_to :action => 'index'
          if @entry
            render "api/v1/entries/show.json.jbuilder"
          end

@@ -1,13 +1,12 @@
 Rails.application.routes.draw do
   resources :comments
   devise_for :users
-  resources :entries do
-    resources :comments
-  end
+  resources :entries
   namespace :api , defaults: {format: 'json'} do
     namespace :v1 do
       resources :entries
-      resources :comments
+        resources :comments
+      end
     end
   end
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html

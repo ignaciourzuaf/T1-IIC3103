@@ -11,8 +11,12 @@ module Api
 
        def show
          @comment = Comment.find(params[:id])
+         rescue ActiveRecord::RecordNotFound
+         redirect_to :action => 'index'
          if @comment
            render "api/v1/comments/show.json.jbuilder"
+         else
+           render body: nil, status: :not_found
          end
        end
 
