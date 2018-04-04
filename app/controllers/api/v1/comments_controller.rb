@@ -5,12 +5,13 @@ module Api
       respond_to :json
 
        def index
-         @comments = Comment.all
+         @entry = Entry.all.find(params[:entry_id])
          render "api/v1/comments/index.json.jbuilder"
        end
 
        def show
          @comment = Comment.find(params[:id])
+         @entry = Entry.all.find(@comment.entry_id)
          rescue ActiveRecord::RecordNotFound
          redirect_to :action => 'index'
          if @comment

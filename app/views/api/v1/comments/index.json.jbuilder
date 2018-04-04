@@ -1,4 +1,4 @@
-json.array! @comments do |comment|
+json.array! @entry.comments do |comment|
   json.id comment.id
   json.author comment.name
   json.comment comment.content
